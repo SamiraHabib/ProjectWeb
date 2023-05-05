@@ -1,8 +1,11 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class Exercise
     {
-        public int Id { get; set; }
+        [Key]
+        public int IdExercise { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

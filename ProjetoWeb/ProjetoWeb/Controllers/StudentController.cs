@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoWeb.Models;
@@ -17,6 +18,7 @@ namespace ProjetoWeb.Controllers
 
         // GET: api/Student
         [HttpGet]
+        [Authorize(Policy = "StudentPolicy")]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
             if (_context.Students == null)
@@ -28,6 +30,7 @@ namespace ProjetoWeb.Controllers
 
         // GET: api/Student/5
         [HttpGet("{id}")]
+        [Authorize(Policy = "StudentPolicy")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
             if (_context.Students == null)

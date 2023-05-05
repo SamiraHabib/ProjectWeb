@@ -1,7 +1,10 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class Telephone
     {
+        [Key]
         public int IdTelephone { get; set; }
         public int IdStudent { get; set; }
         public string Number { get; set; }

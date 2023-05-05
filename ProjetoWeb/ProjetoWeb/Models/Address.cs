@@ -1,7 +1,10 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class Address
     {
+        [Key]
         public int IdAddress { get; set; }
         public string Country { get; set; }
         public string State { get; set; }

@@ -1,7 +1,10 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class Payment
     {
+        [Key]
         public int IdPayment { get; set; }
         public int IdAdmin { get; set; }
         public Admin Admin { get; set; }

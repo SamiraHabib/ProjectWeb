@@ -48,7 +48,7 @@ namespace ProjetoWeb.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutClass(int id, Class @class)
         {
-            if (id != @class.Id)
+            if (id != @class.IdClass)
             {
                 return BadRequest();
             }
@@ -85,7 +85,7 @@ namespace ProjetoWeb.Controllers
             _context.Classes.Add(@class);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClass", new { id = @class.Id }, @class);
+            return CreatedAtAction("GetClass", new { id = @class.IdClass }, @class);
         }
 
         // DELETE: api/Class/5
@@ -110,7 +110,7 @@ namespace ProjetoWeb.Controllers
 
         private bool ClassExists(int id)
         {
-            return (_context.Classes?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Classes?.Any(e => e.IdClass == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class ContentManagement
     {
+        [Key]
         public int IdContentManagement { get; set; }
         public int IdAddress { get; set; }
         public int IdAdmin { get; set; }

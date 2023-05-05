@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoWeb.Models;
@@ -17,6 +18,7 @@ namespace ProjetoWeb.Controllers
 
         // GET: api/Admin
         [HttpGet]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<IEnumerable<Admin>>> GetAdmins()
         {
             if (_context.Admins == null)
@@ -28,6 +30,7 @@ namespace ProjetoWeb.Controllers
 
         // GET: api/Admin/5
         [HttpGet("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<Admin>> GetAdmin(int id)
         {
             if (_context.Admins == null)

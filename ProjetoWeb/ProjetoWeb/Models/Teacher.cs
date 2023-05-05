@@ -1,7 +1,10 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class Teacher
     {
+        [Key]
         public int IdTeacher { get; set; }
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }

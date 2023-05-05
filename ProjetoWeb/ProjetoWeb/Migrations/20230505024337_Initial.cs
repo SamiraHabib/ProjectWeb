@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -30,6 +31,20 @@ namespace ProjetoWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Address", x => x.id_address);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Admin",
+                columns: table => new
+                {
+                    id_admin = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    social_name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admin", x => x.id_admin);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,119 +150,6 @@ namespace ProjetoWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    id_user = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    id_profile = table.Column<int>(type: "int", nullable: false),
-                    email = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    password = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
-                    name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    social_name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.id_user);
-                    table.ForeignKey(
-                        name: "FK_User_Profile",
-                        column: x => x.id_profile,
-                        principalTable: "Profile",
-                        principalColumn: "id_profile",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Class",
-                columns: table => new
-                {
-                    id_class = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    TeacherId = table.Column<int>(type: "int", nullable: false),
-                    name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    start_hour = table.Column<TimeSpan>(type: "time", nullable: false),
-                    end_hour = table.Column<TimeSpan>(type: "time", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Class", x => x.id_class);
-                    table.ForeignKey(
-                        name: "fk_class_status",
-                        column: x => x.StatusId,
-                        principalTable: "Status",
-                        principalColumn: "id_status",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_class_teacher",
-                        column: x => x.TeacherId,
-                        principalTable: "Teacher",
-                        principalColumn: "id_teacher",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Admin",
-                columns: table => new
-                {
-                    id_admin = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    id_user = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admin", x => x.id_admin);
-                    table.ForeignKey(
-                        name: "FK_Admin_User_id_user",
-                        column: x => x.id_user,
-                        principalTable: "User",
-                        principalColumn: "id_user",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Student",
-                columns: table => new
-                {
-                    id_student = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    id_user = table.Column<int>(type: "int", nullable: true),
-                    id_genre = table.Column<int>(type: "int", nullable: true),
-                    id_address = table.Column<int>(type: "int", nullable: true),
-                    birth_date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    is_blocked = table.Column<bool>(type: "bit", nullable: true),
-                    block_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    image_profile = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Student", x => x.id_student);
-                    table.ForeignKey(
-                        name: "FK_Student_Address_id_address",
-                        column: x => x.id_address,
-                        principalTable: "Address",
-                        principalColumn: "id_address");
-                    table.ForeignKey(
-                        name: "FK_Student_Genre_id_genre",
-                        column: x => x.id_genre,
-                        principalTable: "Genre",
-                        principalColumn: "id_genre");
-                    table.ForeignKey(
-                        name: "FK_Student_User_id_user",
-                        column: x => x.id_user,
-                        principalTable: "User",
-                        principalColumn: "id_user");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ContentManagement",
                 columns: table => new
                 {
@@ -285,6 +187,70 @@ namespace ProjetoWeb.Migrations
                         column: x => x.AdminIdAdmin,
                         principalTable: "Admin",
                         principalColumn: "id_admin",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Student",
+                columns: table => new
+                {
+                    id_student = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_genre = table.Column<int>(type: "int", nullable: true),
+                    id_address = table.Column<int>(type: "int", nullable: true),
+                    name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    social_name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    birth_date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    is_blocked = table.Column<bool>(type: "bit", nullable: true),
+                    block_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    image_profile = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Student", x => x.id_student);
+                    table.ForeignKey(
+                        name: "FK_Student_Address_id_address",
+                        column: x => x.id_address,
+                        principalTable: "Address",
+                        principalColumn: "id_address");
+                    table.ForeignKey(
+                        name: "FK_Student_Genre_id_genre",
+                        column: x => x.id_genre,
+                        principalTable: "Genre",
+                        principalColumn: "id_genre");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Class",
+                columns: table => new
+                {
+                    id_class = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    start_hour = table.Column<TimeSpan>(type: "time", nullable: false),
+                    end_hour = table.Column<TimeSpan>(type: "time", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Class", x => x.id_class);
+                    table.ForeignKey(
+                        name: "fk_class_status",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "id_status",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_class_teacher",
+                        column: x => x.TeacherId,
+                        principalTable: "Teacher",
+                        principalColumn: "id_teacher",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -329,31 +295,6 @@ namespace ProjetoWeb.Migrations
                     table.ForeignKey(
                         name: "FK_Payment_Student_id_student",
                         column: x => x.id_student,
-                        principalTable: "Student",
-                        principalColumn: "id_student",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StudentCheckin",
-                columns: table => new
-                {
-                    IdStudent = table.Column<int>(type: "int", nullable: false),
-                    IdClass = table.Column<int>(type: "int", nullable: false),
-                    date_time = table.Column<DateTime>(type: "datetime", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudentCheckin", x => new { x.IdStudent, x.IdClass });
-                    table.ForeignKey(
-                        name: "FK_StudentCheckin_Class_IdClass",
-                        column: x => x.IdClass,
-                        principalTable: "Class",
-                        principalColumn: "id_class",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_StudentCheckin_Student_IdStudent",
-                        column: x => x.IdStudent,
                         principalTable: "Student",
                         principalColumn: "id_student",
                         onDelete: ReferentialAction.Restrict);
@@ -410,10 +351,66 @@ namespace ProjetoWeb.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Admin_id_user",
-                table: "Admin",
-                column: "id_user");
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    id_user = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_admin = table.Column<int>(type: "int", nullable: true),
+                    id_student = table.Column<int>(type: "int", nullable: true),
+                    id_profile = table.Column<int>(type: "int", nullable: false),
+                    email = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
+                    password = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.id_user);
+                    table.ForeignKey(
+                        name: "FK_User_Admin_id_admin",
+                        column: x => x.id_admin,
+                        principalTable: "Admin",
+                        principalColumn: "id_admin");
+                    table.ForeignKey(
+                        name: "FK_User_Profile_id_profile",
+                        column: x => x.id_profile,
+                        principalTable: "Profile",
+                        principalColumn: "id_profile",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_User_Student_id_student",
+                        column: x => x.id_student,
+                        principalTable: "Student",
+                        principalColumn: "id_student");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentCheckin",
+                columns: table => new
+                {
+                    IdStudent = table.Column<int>(type: "int", nullable: false),
+                    IdClass = table.Column<int>(type: "int", nullable: false),
+                    date_time = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentCheckin", x => new { x.IdStudent, x.IdClass });
+                    table.ForeignKey(
+                        name: "FK_StudentCheckin_Class_IdClass",
+                        column: x => x.IdClass,
+                        principalTable: "Class",
+                        principalColumn: "id_class",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudentCheckin_Student_IdStudent",
+                        column: x => x.IdStudent,
+                        principalTable: "Student",
+                        principalColumn: "id_student",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Class_StatusId",
@@ -466,11 +463,6 @@ namespace ProjetoWeb.Migrations
                 column: "id_genre");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Student_id_user",
-                table: "Student",
-                column: "id_user");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_StudentCheckin_IdClass",
                 table: "StudentCheckin",
                 column: "IdClass");
@@ -486,9 +478,19 @@ namespace ProjetoWeb.Migrations
                 column: "id_student");
 
             migrationBuilder.CreateIndex(
+                name: "IX_User_id_admin",
+                table: "User",
+                column: "id_admin");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_id_profile",
                 table: "User",
                 column: "id_profile");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_id_student",
+                table: "User",
+                column: "id_student");
         }
 
         /// <inheritdoc />
@@ -510,7 +512,7 @@ namespace ProjetoWeb.Migrations
                 name: "Telephone");
 
             migrationBuilder.DropTable(
-                name: "Admin");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "PaymentType");
@@ -520,6 +522,12 @@ namespace ProjetoWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Exercise");
+
+            migrationBuilder.DropTable(
+                name: "Admin");
+
+            migrationBuilder.DropTable(
+                name: "Profile");
 
             migrationBuilder.DropTable(
                 name: "Student");
@@ -535,12 +543,6 @@ namespace ProjetoWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Genre");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Profile");
         }
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class Status
     {
+        [Key]
         public int IdStatus { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }

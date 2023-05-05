@@ -12,7 +12,7 @@ using ProjetoWeb.Models;
 namespace ProjetoWeb.Migrations
 {
     [DbContext(typeof(WebApiContext))]
-    [Migration("20230429214426_Initial")]
+    [Migration("20230505024337_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -102,25 +102,31 @@ namespace ProjetoWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAdmin"));
 
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int")
-                        .HasColumnName("id_user");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("SocialName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("social_name");
 
                     b.HasKey("IdAdmin");
-
-                    b.HasIndex("IdUser");
 
                     b.ToTable("Admin", (string)null);
                 });
 
             modelBuilder.Entity("ProjetoWeb.Models.Class", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdClass")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id_class");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdClass"));
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -165,7 +171,7 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdClass");
 
                     b.HasIndex("StatusId");
 
@@ -279,12 +285,12 @@ namespace ProjetoWeb.Migrations
 
             modelBuilder.Entity("ProjetoWeb.Models.Exercise", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdExercise")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id_exercise");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdExercise"));
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -306,7 +312,7 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdExercise");
 
                     b.ToTable("Exercise", (string)null);
                 });
@@ -566,10 +572,6 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id_genre");
 
-                    b.Property<int?>("IdUser")
-                        .HasColumnType("int")
-                        .HasColumnName("id_user");
-
                     b.Property<byte[]>("ImageProfile")
                         .IsRequired()
                         .HasColumnType("varbinary(max)")
@@ -579,13 +581,23 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("is_blocked");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("SocialName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("social_name");
+
                     b.HasKey("IdStudent");
 
                     b.HasIndex("IdAddress");
 
                     b.HasIndex("IdGenre");
-
-                    b.HasIndex("IdUser");
 
                     b.ToTable("Student", (string)null);
                 });
@@ -740,15 +752,17 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("email");
 
+                    b.Property<int?>("IdAdmin")
+                        .HasColumnType("int")
+                        .HasColumnName("id_admin");
+
                     b.Property<int>("IdProfile")
                         .HasColumnType("int")
                         .HasColumnName("id_profile");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("name");
+                    b.Property<int?>("IdStudent")
+                        .HasColumnType("int")
+                        .HasColumnName("id_student");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -757,12 +771,6 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("password");
 
-                    b.Property<string>("SocialName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("social_name");
-
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
@@ -770,20 +778,13 @@ namespace ProjetoWeb.Migrations
 
                     b.HasKey("IdUser");
 
+                    b.HasIndex("IdAdmin");
+
                     b.HasIndex("IdProfile");
 
+                    b.HasIndex("IdStudent");
+
                     b.ToTable("User", (string)null);
-                });
-
-            modelBuilder.Entity("ProjetoWeb.Models.Admin", b =>
-                {
-                    b.HasOne("ProjetoWeb.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjetoWeb.Models.Class", b =>
@@ -871,15 +872,9 @@ namespace ProjetoWeb.Migrations
                         .WithMany()
                         .HasForeignKey("IdGenre");
 
-                    b.HasOne("ProjetoWeb.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("IdUser");
-
                     b.Navigation("Address");
 
                     b.Navigation("Genre");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjetoWeb.Models.StudentCheckin", b =>
@@ -934,14 +929,25 @@ namespace ProjetoWeb.Migrations
 
             modelBuilder.Entity("ProjetoWeb.Models.User", b =>
                 {
+                    b.HasOne("ProjetoWeb.Models.Admin", "Admin")
+                        .WithMany()
+                        .HasForeignKey("IdAdmin");
+
                     b.HasOne("ProjetoWeb.Models.Profile", "Profile")
                         .WithMany()
                         .HasForeignKey("IdProfile")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_User_Profile");
+                        .IsRequired();
+
+                    b.HasOne("ProjetoWeb.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("IdStudent");
+
+                    b.Navigation("Admin");
 
                     b.Navigation("Profile");
+
+                    b.Navigation("Student");
                 });
 #pragma warning restore 612, 618
         }

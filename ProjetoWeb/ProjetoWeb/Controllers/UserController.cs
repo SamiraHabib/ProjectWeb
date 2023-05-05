@@ -1,5 +1,8 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjetoWeb.DTO;
+using ProjetoWeb.Interfaces;
 using ProjetoWeb.Models;
 
 namespace ProjetoWeb.Controllers
@@ -9,10 +12,14 @@ namespace ProjetoWeb.Controllers
     public class UserController : ControllerBase
     {
         private readonly WebApiContext _context;
+        private readonly IAuthService _authService;
+        private readonly IMapper _mapper;
 
-        public UserController(WebApiContext context)
+        public UserController(WebApiContext context, IAuthService authService, IMapper mapper)
         {
             _context = context;
+            _authService = authService;
+            _mapper = mapper;
         }
 
         // GET: api/User
@@ -107,6 +114,27 @@ namespace ProjetoWeb.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> UsuarioLogin([FromBody] Login model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _authService.ValidateCredentials(model.Email, model.Senha);
+            if (user == null)
+            {
+                return BadRequest("Credenciais inválidas");
+            }
+
+            var authenticatedUser = _mapper.Map<AuthenticatedUser>(user);
+            var token = _authService.GenerateJwtToken(authenticatedUser);
+
+            return Ok(new JwtAuthentication { Token = token.Token, ExpiresAt = token.ExpiresAt });
+        }
+
 
         private bool UserExists(int id)
         {

@@ -48,13 +48,13 @@ namespace ProjetoWeb.Models
                 entity.ToTable("User");
                 entity.HasKey(e => e.IdUser);
                 entity.Property(e => e.IdUser).HasColumnName("id_user").IsRequired();
+                entity.Property(e => e.IdAdmin).HasColumnName("id_admin");
+                entity.Property(e => e.IdStudent).HasColumnName("id_student");
                 entity.Property(e => e.IdProfile).HasColumnName("id_profile").IsRequired();
                 entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(255)
                     .IsRequired().IsUnicode(false);
                 entity.Property(e => e.Password).HasColumnName("password").HasMaxLength(255)
                     .IsRequired().IsUnicode(false);
-                entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(255);
-                entity.Property(e => e.SocialName).HasColumnName("social_name").HasMaxLength(255);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
@@ -64,8 +64,15 @@ namespace ProjetoWeb.Models
                 entity.HasOne(e => e.Profile)
                     .WithMany()
                     .HasForeignKey(e => e.IdProfile)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_User_Profile");
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(u => u.Admin)
+                    .WithMany()
+                    .HasForeignKey(u => u.IdAdmin);
+
+                entity.HasOne(u => u.Student)
+                    .WithMany()
+                    .HasForeignKey(u => u.IdStudent);
             });
 
             modelBuilder.Entity<Address>(entity =>
@@ -133,8 +140,8 @@ namespace ProjetoWeb.Models
                 entity.ToTable("Admin");
                 entity.HasKey(e => e.IdAdmin);
                 entity.Property(e => e.IdAdmin).HasColumnName("id_admin");
-                entity.Property(e => e.IdUser).HasColumnName("id_user").IsRequired();
-                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.IdUser);
+                entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(255);
+                entity.Property(e => e.SocialName).HasColumnName("social_name").HasMaxLength(255);
             });
 
             modelBuilder.Entity<Student>(entity =>
@@ -142,14 +149,14 @@ namespace ProjetoWeb.Models
                 entity.ToTable("Student");
                 entity.HasKey(e => e.IdStudent);
                 entity.Property(e => e.IdStudent).HasColumnName("id_student");
-                entity.Property(e => e.IdUser).HasColumnName("id_user");
                 entity.Property(e => e.IdGenre).HasColumnName("id_genre");
                 entity.Property(e => e.IdAddress).HasColumnName("id_address");
+                entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(255);
+                entity.Property(e => e.SocialName).HasColumnName("social_name").HasMaxLength(255);
                 entity.Property(e => e.BirthDate).HasColumnName("birth_date");
                 entity.Property(e => e.IsBlocked).HasColumnName("is_blocked");
                 entity.Property(e => e.BlockDescription).HasColumnName("block_description");
                 entity.Property(e => e.ImageProfile).HasColumnName("image_profile");
-                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.IdUser);
                 entity.HasOne(e => e.Genre).WithMany().HasForeignKey(e => e.IdGenre);
                 entity.HasOne(e => e.Address).WithMany().HasForeignKey(e => e.IdAddress);
             });
@@ -172,8 +179,8 @@ namespace ProjetoWeb.Models
             modelBuilder.Entity<Exercise>(entity =>
             {
                 entity.ToTable("Exercise");
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("id_exercise");
+                entity.HasKey(e => e.IdExercise);
+                entity.Property(e => e.IdExercise).HasColumnName("id_exercise");
                 entity.Property(e => e.Description).HasColumnName("description").HasMaxLength(200);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
@@ -185,8 +192,8 @@ namespace ProjetoWeb.Models
             modelBuilder.Entity<Class>(entity =>
             {
                 entity.ToTable("Class");
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("id_class");
+                entity.HasKey(e => e.IdClass);
+                entity.Property(e => e.IdClass).HasColumnName("id_class");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(200);
                 entity.Property(e => e.Date).HasColumnName("date");
                 entity.Property(e => e.StartHour).HasColumnName("start_hour");

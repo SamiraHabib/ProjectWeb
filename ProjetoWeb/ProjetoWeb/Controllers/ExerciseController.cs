@@ -48,7 +48,7 @@ namespace ProjetoWeb.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutExercise(int id, Exercise exercise)
         {
-            if (id != exercise.Id)
+            if (id != exercise.IdExercise)
             {
                 return BadRequest();
             }
@@ -85,7 +85,7 @@ namespace ProjetoWeb.Controllers
             _context.Exercises.Add(exercise);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExercise", new { id = exercise.Id }, exercise);
+            return CreatedAtAction("GetExercise", new { id = exercise.IdExercise }, exercise);
         }
 
         // DELETE: api/Exercise/5
@@ -110,7 +110,7 @@ namespace ProjetoWeb.Controllers
 
         private bool ExerciseExists(int id)
         {
-            return (_context.Exercises?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Exercises?.Any(e => e.IdExercise == id)).GetValueOrDefault();
         }
     }
 }

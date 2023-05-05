@@ -1,7 +1,10 @@
-﻿namespace ProjetoWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoWeb.Models
 {
     public class Genre
     {
+        [Key]
         public int IdGenre { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }
