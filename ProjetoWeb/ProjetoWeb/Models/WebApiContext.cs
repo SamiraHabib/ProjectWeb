@@ -39,7 +39,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -50,7 +51,7 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.IdUser).HasColumnName("id_user").IsRequired();
                 entity.Property(e => e.IdAdmin).HasColumnName("id_admin");
                 entity.Property(e => e.IdStudent).HasColumnName("id_student");
-                entity.Property(e => e.IdProfile).HasColumnName("id_profile").IsRequired();
+                entity.Property(e => e.IdProfile).HasColumnName("id_profile");
                 entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(255)
                     .IsRequired().IsUnicode(false);
                 entity.Property(e => e.Password).HasColumnName("password").HasMaxLength(255)
@@ -58,7 +59,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
 
                 entity.HasOne(e => e.Profile)
@@ -90,7 +92,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -105,7 +108,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -118,7 +122,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -131,7 +136,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -172,7 +178,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -185,7 +192,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -202,7 +210,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
                 entity.HasOne(d => d.Status).WithMany().HasForeignKey(d => d.StatusId)
                     .HasConstraintName("fk_class_status");
@@ -231,7 +240,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
             });
 
@@ -250,7 +260,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
                 entity.HasOne(e => e.Admin).WithMany().HasForeignKey(e => e.IdAdmin)
                     .OnDelete(DeleteBehavior.Restrict);
@@ -272,7 +283,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
                 entity.HasOne(d => d.Student).WithMany().HasForeignKey(d => d.IdStudent)
                     .HasConstraintName("FK_Telephone_Student");
@@ -286,7 +298,8 @@ namespace ProjetoWeb.Models
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at")
                     .HasColumnType("datetime").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at")
-                    .HasColumnType("datetime").ValueGeneratedOnAddOrUpdate().IsRequired();
+                    .HasColumnType("datetime").HasDefaultValueSql("GETUTCDATE()")
+                    .ValueGeneratedOnAddOrUpdate().IsRequired();
                 entity.Property(e => e.DeletedAt).HasColumnName("deleted_at").HasColumnType("datetime");
                 entity.HasOne(e => e.Student).WithMany().HasForeignKey(e => e.IdStudent);
                 entity.HasOne(e => e.Exercise).WithMany().HasForeignKey(e => e.IdExercise);

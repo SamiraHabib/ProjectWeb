@@ -15,11 +15,11 @@ namespace ProjetoWeb.Controllers
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
 
-        public UserController(WebApiContext context, IAuthService authService, IMapper mapper)
+        public UserController(WebApiContext context, IMapper mapper, IAuthService authService)
         {
             _context = context;
-            _authService = authService;
             _mapper = mapper;
+            _authService = authService;
         }
 
         // GET: api/User

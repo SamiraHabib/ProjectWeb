@@ -83,7 +83,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdAddress");
 
@@ -166,7 +167,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdClass");
 
@@ -263,7 +265,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("Whatsapp")
                         .IsRequired()
@@ -307,7 +310,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdExercise");
 
@@ -349,7 +353,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdGenre");
 
@@ -407,7 +412,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdPayment");
 
@@ -448,7 +454,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdPaymentType");
 
@@ -492,7 +499,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdProfile");
 
@@ -536,7 +544,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdStatus");
 
@@ -569,9 +578,9 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id_genre");
 
-                    b.Property<byte[]>("ImageProfile")
+                    b.Property<string>("ImageProfile")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("image_profile");
 
                     b.Property<bool?>("IsBlocked")
@@ -642,7 +651,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdStudent", "IdExercise");
 
@@ -677,7 +687,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdTeacher");
 
@@ -715,7 +726,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdTelephone");
 
@@ -753,7 +765,7 @@ namespace ProjetoWeb.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id_admin");
 
-                    b.Property<int>("IdProfile")
+                    b.Property<int?>("IdProfile")
                         .HasColumnType("int")
                         .HasColumnName("id_profile");
 
@@ -771,7 +783,8 @@ namespace ProjetoWeb.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime")
-                        .HasColumnName("updated_at");
+                        .HasColumnName("updated_at")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("IdUser");
 
@@ -933,8 +946,7 @@ namespace ProjetoWeb.Migrations
                     b.HasOne("ProjetoWeb.Models.Profile", "Profile")
                         .WithMany()
                         .HasForeignKey("IdProfile")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ProjetoWeb.Models.Student", "Student")
                         .WithMany()

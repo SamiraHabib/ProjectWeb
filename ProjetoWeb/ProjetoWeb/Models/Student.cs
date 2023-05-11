@@ -13,7 +13,8 @@ namespace ProjetoWeb.Models
         public DateTime? BirthDate { get; set; }
         public bool? IsBlocked { get; set; }
         public string BlockDescription { get; set; }
-        public byte[] ImageProfile { get; set; }
+        public string ImageProfile { get; set; }
+        //passar ImageProfile para string - mudar as migrations e a controller de usuário e student
         
         public Genre Genre { get; set; }
         public Address Address { get; set; }

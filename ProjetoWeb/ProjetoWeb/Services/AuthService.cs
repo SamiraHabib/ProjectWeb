@@ -23,8 +23,8 @@ namespace ProjetoWeb.Services
         public JwtAuthentication GenerateJwtToken(AuthenticatedUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"] ?? string.Empty);
-            var expires = DateTime.UtcNow.AddDays(int.Parse(_configuration["Jwt:ExpirationInDays"] ?? string.Empty));
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
+            var expires = DateTime.UtcNow.AddDays(int.Parse(_configuration["Jwt:ExpirationInDays"]));
 
             var claims = new List<Claim>
             {
@@ -36,6 +36,8 @@ namespace ProjetoWeb.Services
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                Issuer = _configuration["JWT:Issuer"],
+                Audience = _configuration["JWT:Audience"],
                 Subject = new ClaimsIdentity(claims),
                 Expires = expires,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

@@ -25,7 +25,7 @@ namespace ProjetoWeb.Migrations
                     neighborhood = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     complement = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -55,7 +55,7 @@ namespace ProjetoWeb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -73,7 +73,7 @@ namespace ProjetoWeb.Migrations
                     normalized_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     active = table.Column<bool>(type: "bit", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -89,7 +89,7 @@ namespace ProjetoWeb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -107,7 +107,7 @@ namespace ProjetoWeb.Migrations
                     normalized_name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     active = table.Column<bool>(type: "bit", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -125,7 +125,7 @@ namespace ProjetoWeb.Migrations
                     normalized_name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     active = table.Column<bool>(type: "bit", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -141,7 +141,7 @@ namespace ProjetoWeb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -168,7 +168,7 @@ namespace ProjetoWeb.Migrations
                     telephone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     email_contact = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true),
                     AddressIdAddress = table.Column<int>(type: "int", nullable: false),
                     AdminIdAdmin = table.Column<int>(type: "int", nullable: false)
@@ -203,7 +203,7 @@ namespace ProjetoWeb.Migrations
                     birth_date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     is_blocked = table.Column<bool>(type: "bit", nullable: true),
                     block_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    image_profile = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    image_profile = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -234,7 +234,7 @@ namespace ProjetoWeb.Migrations
                     end_hour = table.Column<TimeSpan>(type: "time", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -268,7 +268,7 @@ namespace ProjetoWeb.Migrations
                     invoice = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     date_payment = table.Column<DateTime>(type: "datetime2", nullable: true),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -308,7 +308,7 @@ namespace ProjetoWeb.Migrations
                     IdExercise = table.Column<int>(type: "int", nullable: false),
                     points = table.Column<int>(type: "int", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -337,7 +337,7 @@ namespace ProjetoWeb.Migrations
                     id_student = table.Column<int>(type: "int", nullable: false),
                     number = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -359,11 +359,11 @@ namespace ProjetoWeb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     id_admin = table.Column<int>(type: "int", nullable: true),
                     id_student = table.Column<int>(type: "int", nullable: true),
-                    id_profile = table.Column<int>(type: "int", nullable: false),
+                    id_profile = table.Column<int>(type: "int", nullable: true),
                     email = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     password = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     deleted_at = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
